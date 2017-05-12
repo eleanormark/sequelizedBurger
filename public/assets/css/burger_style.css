@@ -1,0 +1,58 @@
+body  {
+    background: url('/assets/img/sweet-potato-burger.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+input[type=text] {
+    width: 122px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    padding: 12px;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 100%;
+}
+
+.form-control:focus {
+    border-color: white;
+
+}
+
+.content {
+    margin-top: 40px;
+}
+
+.logo-text {
+    color: white;
+    text-shadow: 1px 1px 1px black;
+}
+
+.panel-default {
+    background: rgba(204, 204, 204, 0.5)!important;
+}
+
+.panel-heading {
+    font-weight: bold;
+    background: rgba(204, 204, 204, 0.5)!important;
+}
+
+.btn {
+    border: solid white 1px;
+    background: rgba(204, 204, 204, 0.5)!important;
+    margin-bottom: 20px;
+}
+
+.btn:hover, .btn:active, .btn:focus {
+    outline: none!important;
+    -webkit-box-shadow: none;
+}
