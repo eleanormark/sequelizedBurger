@@ -1,53 +1,56 @@
-var express = require("express");
-var router = express.Router();
+var db = require('../models');
 
-// Import the model (burger.js) to use its database functions.
-var burger = require("../models/burger.js");
+module.exports = function(app) {
 
-// Create all our routes and set up logic within those routes where required.
-router.get("/", function(req, res) {
-    burger.all(function(data) {
-        var hbsObject = {
-            burgers: data
-        };
-        console.log(hbsObject);
-        res.render("index", hbsObject);
+    // GET route for retrieving all burgers from database
+    app.get("/", function (req, res) {
+        db.Burger.findAll({}).then(function (result) {
+            var hbsObject = {
+                burgers: result
+            };
+            console.log(hbsObject);
+            res.render("index", hbsObject);
+        });
     });
-});
-router.post("/", function(req, res) {
-    console.log("inside post of fresh hot burger");
-    burger.create([
-        "burger_name"
-    ], [
-        req.body.burger
-    ], function() {
-        res.redirect("/");
-    });
-});
-router.put("/:id", function(req, res) {
-    var condition = "id = " + req.params.id;
-    console.log("condition", condition);
-    burger.update({
-        devoured: req.body.devoured,
-    }, condition, function() {
-        res.redirect("/");
-    });
-});
 
-router.put("/remove/:id", function(req, res) {
-    var condition = "id = " + req.params.id;
-    console.log("condition", condition);
-    burger.update({
-        removed: req.body.removed,
-    }, condition, function() {
-        res.redirect("/");
+    // POST route for saving a new Burger
+    app.post("/", function (req, res) {
+        db.Burger.create({
+            burger_name: req.body.burger
+        }).then(function (result) {
+            console.log(result.devoured);
+            res.redirect('/');
+        });
     });
-});
-router.delete("/:id", function(req, res) {
-    var condition = "id = " + req.params.id;
-    burger.delete(condition, function() {
-        res.redirect("/");
+
+    // PUT route for updating a burger's devoured value to true.
+    app.put("/:id", function (req, res) {
+        console.log("PARAMS ID",req.params.id);
+        db.Burger.update({
+            devoured: req.body.devoured
+        },{
+            where: {
+                id: req.params.id
+            }
+        }).then(function (result) {
+            console.log(result.devoured);
+            res.redirect('/');
+        });
     });
-});
-// Export routes for server.js to use.
-module.exports = router;
+
+    app.put("/remove/:id", function(req, res) {
+        var condition = "id = " + req.params.id;
+        console.log("condition", condition);
+        db.Burger.update({
+            removed: req.body.removed,
+        },{
+            where: {
+                id: req.params.id
+            }
+        }).then(function (result) {
+            console.log(result.removed);
+            res.redirect('/');
+        });
+    });
+}
+
