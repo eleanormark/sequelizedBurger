@@ -16,7 +16,12 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
+        },
+        created_at: {
+            type: DataTypes.DATE
         }
+    }, {
+        timestamps: false
     });
 
     console.log(typeof Burger);

@@ -5,25 +5,25 @@
 --Now insert the entries you defined in seeds.sql by running the file: source seeds.sql.
 --Close out of the MySQL command line tool: exit.
 
-create database if not exists burger_db;
+create database if not exists seq_burger_db;
 
-use burger_db;
+use seq_burger_db;
 
 create table if not exists burgers (
-   id INT( 11 ) AUTO_INCREMENT NOT NULL,
-   burger_name VARCHAR( 255) NOT NULL,
+   id INT AUTO_INCREMENT NOT NULL,
+   burger_name VARCHAR(80) NOT NULL,
    devoured BOOLEAN NOT NULL DEFAULT false,
    removed BOOLEAN NOT NULL DEFAULT false,
-   created_at TIMESTAMP NOT NULL,
-   PRIMARY KEY ( id )
+   created_at TIMESTAMP,
+   PRIMARY KEY (id)
 );
 
 insert into burgers (burger_name)
 values
-('sweet potato burger'),
-('portobello mushroom burger'),
-('tofu burger'),
-('black bean burger');
+('Sweet Potato Burger'),
+('Portobello Mushroom Burger'),
+('Tofu Burger'),
+('Black Bean Burger');
 
-
---select * from burgers;
+--select *
+--from burgers
