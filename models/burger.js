@@ -18,12 +18,20 @@ module.exports = function(sequelize, DataTypes) {
             defaultValue: false
         },
         created_at: {
-            type: DataTypes.DATE
+            type: DataTypes.DATE,
+            defaultValue: DataTypes.NOW
+        },
+        CustomerId: {
+            type: DataTypes.INTEGER
         }
-    }, {
-        timestamps: false
-    });
+    },{
+        timestamps: false,
+        classMethods: {
+            associate: function(models) {
+                console.log('associating burger')
+                Burger.belongsTo(models.Customer, { foreignKey: 'CustomerId' })
+        }
+} });
 
-    console.log(typeof Burger);
     return Burger;
 };

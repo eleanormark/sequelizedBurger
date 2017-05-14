@@ -34,7 +34,7 @@ require("./controllers/burgers_controller.js")(app);
 
 
 // Syncing our Sequelize models with our database and then starting our express app
-db.sequelize.sync().then(function() {
+db.sequelize.sync({ force: true }).then(function() {
     app.listen(PORT, function() {
     console.log("App listening on PORT " + PORT);
     });

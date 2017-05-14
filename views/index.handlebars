@@ -4,26 +4,29 @@
     <p class="logo-text">For the People&emsp;•&emsp;For the Planet</p>
 
     <div class="row content">
-        <div class="col-md-4">
-            <form action="/?_method=POST" method="POST">
+        <div class="col-md-3">
+            <form class="submit-burger" action="/?_method=POST" method="POST">
                 <div class="form-group">
                     <input type="text" class="form-control" id="burger" placeholder="Enter a burger." name="burger">
                 </div>
                 <button type="submit" class="btn">Submit</button>
             </form>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="panel panel-default">
                 <div class="panel-heading">Waiting to Be Devoured</div>
                 <div class="panel-body">
                     {{#each burgers}}
                         {{#unless this.devoured}}
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-sm-7">
                                     <p><strong>{{this.id}}. {{this.burger_name}}</strong></p>
                                 </div>
-                                <div class="col-sm-4">
-                                    <form action="/{{this.id}}?_method=PUT" method="POST">
+                                <div class="col-sm-5">
+                                    <form class="devoured-burger" action="/{{this.id}}?_method=PUT" method="POST">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="customer" placeholder="Customer?" name="customer">
+                                        </div>
                                         <input type="hidden" name="devoured" value="true">
                                         <button type="submit" class="btn">Devour!</button>
                                     </form>
@@ -43,7 +46,7 @@
                             {{#unless this.removed}}
                                 <div class="row">
                                     <div class="col-sm-8">
-                                        <p><strong>{{this.id}}. {{this.burger_name}}</strong></p>
+                                        <p><strong>{{this.id}}. {{this.burger_name}}</strong> (Consumed by: {{this.Customer.name}})</p>
                                     </div>
                                     <div class="col-sm-4">
                                         <form action="/remove/{{this.id}}?_method=PUT" method="POST">
